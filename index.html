@@ -8,7 +8,7 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="full-screen" content="yes">
 
-    <title>Chain Love</title>
+    <title>链 爱</title>
     <link rel="stylesheet" href="lib/bootstrap-4.0.0-dist/css/bootstrap.min.css">
     <style>
         .list {
@@ -19,17 +19,17 @@
 
         .name {
             text-align: center;
-            font-size: 66px;
+            font-size: 40px;
             padding-top: 60px
             /* text-shadow: 3px 5px grey, 1px 1px #333; */
         }
 
         .subtitle {
             text-align: center;
-            font-size: 32px;
+            font-size: 16px;
         }
 
-        .img {
+        /* .img {
             width: 48%;
             height: 53%;
             margin: auto;
@@ -38,32 +38,34 @@
         .img img {
             width: 100%;
             height: 100%;
-        }
+        } */
 
         .search {
-            width: 80%;
+            margin-left: 30%;
             height: 100px;
-            margin: auto;
+            width: 60%;
+            align-content: center;
         }
 
         .noExtension {
             width: 60%;
             height: 100px;
-            margin: auto;
-            font-size: 23px;
+            padding-left: 20px;
+            align-content: bottom;
+            font-size: 14px;
         }
 
         #search_value {
-            width: 80%;
+            width: 60%;
+
+            padding: 10px;
             height: 50px;
-            box-shadow: 3px 5px grey, 1px 1px #333;
         }
 
         .search button {
-            width: 18%;
+            width: 12%;
             height: 50px;
-            margin-left: 6px;
-            box-shadow: 3px 5px grey, 1px 1px #333;
+            margin-left: 10px;
         }
 
         @keyframes rotate {
@@ -90,6 +92,13 @@
             animation-fill-mode: forwards;
             animation-timing-function: linear; */
             /*  当动画结束时，让<div>元素保留上一个关键帧的样式值 */
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-left: 40px;
+            margin-top: 40px;
         }
 
         .result_success {
@@ -137,8 +146,8 @@
         }
 
         .contenner {
-            background: url("img/bg.jpg");
-            height: 800px;
+            background: url("img/bg.jpeg");
+            height: 150px;
         }
 
         .author {
@@ -153,92 +162,92 @@
 </head>
 
 <body>
+
     <div class="contenner">
-        <div class="list">
-            <div class="name">链 爱</div>
-            <div class="subtitle">将你的爱情写入区块链吧～</div>
-            <div class="img logo_rotate">
-                <!-- <img src="img/logo.png" alt=""> -->
-            </div>
-            <div class="noExtension hide" id="noExtension">
-                NOTE: Please install
-                <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> to use SUPER DICTIONARY
-            </div>
 
-            <div class="search">
-                <input id="search_value" type="text">
-                <!-- <button id=search></button> -->
-                <button id="push">写入星云链</button>
-            </div>
+        <img class="logo" src="img/logo.png" alt="星云链">
 
+        <p class="name">链 爱</p>
 
+        <p class="subtitle">将爱情的点点滴滴，留在星云链上</p>
+
+        <div class="search">
+            <input id="search_value" type="text">
+            <button id="push">写入星云链</button>
         </div>
-        <script src=lib/jquery-3.3.1.min.js></script>
-        <script src=lib/nebPay.js></script>
-        <script src=lib/bootstrap-4.0.0-dist/js/bootstrap.min.js></script>
-        <script src=lib/nebulas.js></script>
-        <script>
-            "use strict";
 
-            // n1xmCNVJ9NNjK651vdeaR6NbUu3thduBAnV 
-            // 5fe80e002a3a67fd0a2b482fb73499c19e4a5612e9eb9c55329de32d510c55ba
+    </div>
+    <div class="noExtension" id="noExtension">
+        小提示：使用链爱前请先安装
+        <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">扩展程序</a>
+    </div>
 
-            var dappAddress = "n1vmUaSpU7KWhrAspo9F5JZp8hg17RZcERc";
+    <script src=lib/jquery-3.3.1.min.js></script>
+    <script src=lib/nebPay.js></script>
+    <script src=lib/bootstrap-4.0.0-dist/js/bootstrap.min.js></script>
+    <script src=lib/nebulas.js></script>
+    <script>
+        "use strict";
 
-            //here we use neb.js to call the "get" function to search from the Dictionary
-            var nebulas = require("nebulas"),
-                Account = nebulas.Account,
-                neb = new nebulas.Neb();
-            neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
+        // n1xmCNVJ9NNjK651vdeaR6NbUu3thduBAnV 
+        // 5fe80e002a3a67fd0a2b482fb73499c19e4a5612e9eb9c55329de32d510c55ba
 
-            // 添加信息功能: 像super-dictionary 中添加词条
-            $("#add").click(function () {
-                $(".result_faile").addClass("hide");
-                $(".add_banner").removeClass("hide");
+        var dappAddress = "n1vmUaSpU7KWhrAspo9F5JZp8hg17RZcERc";
 
-                $("#add_value").val("")
-            })
+        //here we use neb.js to call the "get" function to search from the Dictionary
+        var nebulas = require("nebulas"),
+            Account = nebulas.Account,
+            neb = new nebulas.Neb();
+        neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
 
-            var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
-            var nebPay = new NebPay();
-            var serialNumber
+        // 添加信息功能: 像super-dictionary 中添加词条
+        $("#add").click(function () {
+            $(".result_faile").addClass("hide");
+            $(".add_banner").removeClass("hide");
 
-            $("#push").click(function () {
-                var to = dappAddress;
-                var value = "0";
-                var callFunction = "save"
-                var callArgs = "[\"" + $("#search_value").val() + "\",\"" + "链爱" + "\"]"
+            $("#add_value").val("")
+        })
 
-                serialNumber = nebPay.call(to, value, callFunction, callArgs, { //使用nebpay的call接口去调用合约,
-                    listener: cbPush //设置listener, 处理交易返回信息
-                });
+        var NebPay = require("nebpay"); //https://github.com/nebulasio/nebPay
+        var nebPay = new NebPay();
+        var serialNumber
 
-                intervalQuery = setInterval(function () {
-                    funcIntervalQuery();
-                }, 5000);
+        $("#push").click(function () {
+            var to = dappAddress;
+            var value = "0";
+            var callFunction = "save"
+            var callArgs = "[\"" + $("#search_value").val() + "\",\"" + "链爱" + "\"]"
+
+            serialNumber = nebPay.call(to, value, callFunction, callArgs, { //使用nebpay的call接口去调用合约,
+                listener: cbPush //设置listener, 处理交易返回信息
             });
 
-            var intervalQuery
+            intervalQuery = setInterval(function () {
+                funcIntervalQuery();
+            }, 5000);
+        });
 
-            function funcIntervalQuery() {
-                nebPay.queryPayInfo(serialNumber) //search transaction result from server (result upload to server by app)
-                    .then(function (resp) {
-                        console.log("tx result: " + resp) //resp is a JSON string
-                        var respObject = JSON.parse(resp)
-                        if (respObject.code === 0) {
-                            alert(`set ${$("#search_value").val()} succeed!`)
-                            clearInterval(intervalQuery)
-                        }
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                    });
-            }
+        var intervalQuery
 
-            function cbPush(resp) {
-                console.log("response of push: " + JSON.stringify(resp))
-            }
-        </script>
+        function funcIntervalQuery() {
+            nebPay.queryPayInfo(serialNumber) //search transaction result from server (result upload to server by app)
+                .then(function (resp) {
+                    console.log("tx result: " + resp) //resp is a JSON string
+                    var respObject = JSON.parse(resp)
+                    if (respObject.code === 0) {
+                        alert(`set ${$("#search_value").val()} succeed!`)
+                        clearInterval(intervalQuery)
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+
+        function cbPush(resp) {
+            console.log("response of push: " + JSON.stringify(resp))
+        }
+    </script>
 </body>
 
 </html>
